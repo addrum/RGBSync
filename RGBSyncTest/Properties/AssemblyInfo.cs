@@ -1,17 +1,16 @@
-﻿using System.Resources;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RGBSync")]
+[assembly: AssemblyTitle("RGBSyncTest")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RGBSync")]
-[assembly: AssemblyCopyright("Copyright © Adam Short 2017")]
+[assembly: AssemblyProduct("RGBSyncTest")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("eb0fea4c-d853-4f69-94ee-cd0c78abcb4e")]
+[assembly: Guid("dcc71815-1fa2-4209-b14e-73704c8ea768")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -35,5 +34,3 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: NeutralResourcesLanguage("en-GB")]
-
