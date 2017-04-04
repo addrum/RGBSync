@@ -18,7 +18,7 @@ namespace RGBSync
             Controller = new Controller(Handle);
         }
 
-        private void buttonUpdate_Click(object sender, EventArgs e)
+        public void buttonUpdate_Click(object sender, EventArgs e)
         {
             Data.RgbPercentValue.R = Convert.ToInt32(numericUpDownR.Text);
             Data.RgbPercentValue.G = Convert.ToInt32(numericUpDownG.Text);
