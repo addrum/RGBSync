@@ -27,32 +27,39 @@ namespace RGBSyncTest
             Assert.AreEqual(ExpectedG, target.Data.RgbPercentValue.G);
             Assert.AreEqual(ExpectedB, target.Data.RgbPercentValue.B);
 
-            target.Controller.ShutdownLogitech();
-            target.Controller.ShutdownRazer();
+            target.UnInitAll();
         }
 
         [TestMethod]
-        public void TestSetLogitechRGB()
+        public void TestInitLogitechRGB()
         {
             var target = new MainForm();
-            Assert.IsTrue(target.Controller.InitialisedLogitech);
-            target.Controller.ShutdownLogitech();
+            Assert.IsTrue(target.LogitechController.Initialised);
+            target.LogitechController.UnInit();
         }
 
         [TestMethod]
-        public void TestSetLogitechSetRGB()
+        public void TestUpdateLogitechRGB()
         {
             var target = new MainForm();
-            Assert.IsTrue(target.Controller.UpdateLogitechRGB(new Data().RgbPercentValue));
-            target.Controller.ShutdownLogitech();
+            Assert.IsTrue(target.LogitechController.UpdateLogitechRGB(new Data().RgbPercentValue));
+            target.LogitechController.UnInit();
         }
 
         [TestMethod]
-        public void TestSetRazerRGB()
+        public void TestInitRazerRGB()
         {
             var target = new MainForm();
-            Assert.IsTrue(target.Controller.InitialiasedRazer);
-            target.Controller.ShutdownRazer();
+            Assert.IsTrue(target.RazerController.Initialised);
+            target.RazerController.UnInit();
+        }
+
+        [TestMethod]
+        public void TestUpdateRazerRGB()
+        {
+            var target = new MainForm();
+            Assert.IsTrue(target.RazerController.UpdateRazerRGB(new Data().RgbPercentValue.ColoreColor()));
+            target.RazerController.UnInit();
         }
     }
 }

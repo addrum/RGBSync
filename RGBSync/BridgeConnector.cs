@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Diagnostics;
 using System.Timers;
 using RGBSync.Properties;
@@ -9,7 +8,7 @@ namespace RGBSync
 {
     public class BridgeConnector
     {
-        public LightsController LightsController;
+        public HueController LightsController;
 
         public delegate void BridgeConnectedHandler(object sender, bool bridgeConnected);
 
@@ -24,15 +23,6 @@ namespace RGBSync
                 userRegistered = RegisterNewUser();
             }
 
-            if (userRegistered)
-            {
-                LightsController = new LightsController();
-                LightsController.CreateLights();
-            }
-            else
-            {
-                Debug.WriteLine("Couldn't register any user");
-            }
             return userRegistered;
         }
 

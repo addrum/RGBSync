@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using LedCSharp;
 
@@ -6,8 +7,10 @@ namespace RGBSync
 {
     public partial class MainForm : Form
     {
+        public List<Controller> Controllers;
         public readonly Data Data;
-        public readonly Controller Controller;
+        public readonly LogitechController LogitechController;
+        public readonly RazerController RazerController;
 
         private BridgeConnector _bridgeConnector;
 
@@ -16,8 +19,21 @@ namespace RGBSync
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
 
             InitializeComponent();
+
             Data = new Data();
-            Controller = new Controller(Handle);
+
+            Controllers = new List<Controller>();
+
+            LogitechController = new LogitechController();
+            RazerController = new RazerController(Handle);
+
+            Controllers.Add(LogitechController);
+            Controllers.Add(RazerController);
+
+            foreach (var controller in Controllers)
+            {
+                controller.Init();
+            }
         }
 
         public void buttonUpdate_Click(object sender, EventArgs e)
@@ -26,33 +42,35 @@ namespace RGBSync
             Data.RgbPercentValue.G = Convert.ToInt32(numericUpDownG.Text);
             Data.RgbPercentValue.B = Convert.ToInt32(numericUpDownB.Text);
 
-            if (Controller.InitialisedLogitech)
+            if (LogitechController.Initialised)
             {
-                if (Controller.UpdateLogitechRGB(Data.RgbPercentValue))
+                if (LogitechController.UpdateLogitechRGB(Data.RgbPercentValue))
                 {
                     LogitechGSDK.LogiLedSaveCurrentLighting();
                 }
             }
 
-            if (Controller.InitialiasedRazer)
+            if (RazerController.Initialised)
             {
-                Controller.UpdateRazerRGB(Data.RgbPercentValue.ColoreColor());
+                RazerController.UpdateRazerRGB(Data.RgbPercentValue.ColoreColor());
             }
         }
 
+        // only uninit logitech on app exit else it will reset if we do
+        // it on form closing
         private void OnProcessExit(object sender, EventArgs e)
         {
-            if (Controller.InitialisedLogitech)
+            if (LogitechController.Initialised)
             {
-                Controller.ShutdownLogitech();
+                LogitechController.UnInit();
             }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Controller.InitialiasedRazer)
+            if (RazerController.Initialised)
             {
-                Controller.ShutdownRazer();
+                RazerController.UnInit();
             }
         }
 
@@ -71,6 +89,14 @@ namespace RGBSync
         private void BridgeConnectorOnChanged(object sender, bool bridgeConnected)
         {
             buttonHue.Text = bridgeConnected ? "Hue Bridge Connected" : "Press Hue Bridge button now";
+        }
+
+        public void UnInitAll()
+        {
+            foreach (var controller in Controllers)
+            {
+                controller.UnInit();
+            }
         }
     }
 }
