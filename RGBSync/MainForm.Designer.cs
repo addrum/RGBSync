@@ -94,6 +94,7 @@
             this.Controls.Add(this.numericUpDownR);
             this.Name = "MainForm";
             this.Text = "RGBSync";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownB)).EndInit();

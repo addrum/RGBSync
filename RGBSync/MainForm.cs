@@ -15,18 +15,26 @@ namespace RGBSync
 
             InitializeComponent();
             Data = new Data();
-            Controller = new Controller();
+            Controller = new Controller(Handle);
         }
 
-        public void buttonUpdate_Click(object sender, EventArgs e)
+        private void buttonUpdate_Click(object sender, EventArgs e)
         {
             Data.RgbPercentValue.R = Convert.ToInt32(numericUpDownR.Text);
             Data.RgbPercentValue.G = Convert.ToInt32(numericUpDownG.Text);
             Data.RgbPercentValue.B = Convert.ToInt32(numericUpDownB.Text);
 
-            if (Controller.UpdateLogitechRGB(Data.RgbPercentValue))
+            if (Controller.InitialisedLogitech)
             {
-                LogitechGSDK.LogiLedSaveCurrentLighting();
+                if (Controller.UpdateLogitechRGB(Data.RgbPercentValue))
+                {
+                    LogitechGSDK.LogiLedSaveCurrentLighting();
+                }
+            }
+
+            if (Controller.InitialiasedRazer)
+            {
+                Controller.UpdateRazerRGB(Data.RgbPercentValue.ColoreColor());
             }
         }
 
@@ -35,6 +43,14 @@ namespace RGBSync
             if (Controller.InitialisedLogitech)
             {
                 Controller.ShutdownLogitech();
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Controller.InitialiasedRazer)
+            {
+                Controller.ShutdownRazer();
             }
         }
     }

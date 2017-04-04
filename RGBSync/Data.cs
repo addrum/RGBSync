@@ -1,4 +1,6 @@
-﻿namespace RGBSync
+﻿using Corale.Colore.Core;
+
+namespace RGBSync
 {
     public class Data
     {
@@ -20,6 +22,15 @@
                 R = r;
                 G = g;
                 B = b;
+            }
+
+            public Color ColoreColor()
+            {
+                var r = R / 100;
+                var g = G / 100;
+                var b = B / 100;
+
+                return new Color(r, g, b);
             }
         }
     }

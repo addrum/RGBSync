@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RGBSync;
 
+// ReSharper disable InconsistentNaming
 namespace RGBSyncTest
 {
     [TestClass]
@@ -28,21 +29,27 @@ namespace RGBSyncTest
         }
 
         [TestMethod]
-        // ReSharper disable once InconsistentNaming
         public void TestSetLogitechRGB()
         {
-            var controller = new Controller();
-            Assert.IsTrue(controller.InitialisedLogitech);
-            controller.ShutdownLogitech();
+            var target = new MainForm();
+            Assert.IsTrue(target.Controller.InitialisedLogitech);
+            target.Controller.ShutdownLogitech();
         }
 
         [TestMethod]
-        // ReSharper disable once InconsistentNaming
         public void TestSetLogitechSetRGB()
         {
-            var controller = new Controller();
-            Assert.IsTrue(controller.UpdateLogitechRGB(new Data().RgbPercentValue));
-            controller.ShutdownLogitech();
+            var target = new MainForm();
+            Assert.IsTrue(target.Controller.UpdateLogitechRGB(new Data().RgbPercentValue));
+            target.Controller.ShutdownLogitech();
+        }
+
+        [TestMethod]
+        public void TestSetRazerRGB()
+        {
+            var target = new MainForm();
+            Assert.IsTrue(target.Controller.InitialiasedRazer);
+            target.Controller.ShutdownRazer();
         }
     }
 }
