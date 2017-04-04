@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using Corale.Colore.Core;
 using LedCSharp;
@@ -22,6 +23,7 @@ namespace RGBSync
         public bool InitLogitech()
         {
             var success = LogitechGSDK.LogiLedInit();
+            Debug.WriteLine("Successfully init Logitech");
             // Logitech recommends waiting inbetween init and doing any other calls
             Thread.Sleep(10000);
             LogitechGSDK.LogiLedSetTargetDevice(LogitechGSDK.LOGI_DEVICETYPE_RGB);
@@ -31,10 +33,12 @@ namespace RGBSync
         public void ShutdownLogitech()
         {
             LogitechGSDK.LogiLedShutdown();
+            Debug.WriteLine("Successfully shutdown Logitech");
         }
 
         public bool UpdateLogitechRGB(Data.Colour dataRgbPercentValue)
         {
+            Debug.WriteLine("Attempting to set Logitech lights");
             return LogitechGSDK.LogiLedSetLighting(dataRgbPercentValue.R, dataRgbPercentValue.G, dataRgbPercentValue.B);
         }
 
@@ -42,6 +46,7 @@ namespace RGBSync
         {
             if (!Chroma.SdkAvailable) return false;
 
+            Debug.WriteLine("Successfully init Razer");
             _chromaInstance = (Chroma) Chroma.Instance;
             _chromaInstance.Register(windowHandle);
             return true;
@@ -50,6 +55,7 @@ namespace RGBSync
         public void ShutdownRazer()
         {
             _chromaInstance.Uninitialize();
+            Debug.WriteLine("Successfully shutdown Razer");
         }
 
         public bool UpdateRazerRGB(Color color)
@@ -61,6 +67,7 @@ namespace RGBSync
             }
             catch (Exception e)
             {
+                Debug.WriteLine("Couldn't set Razer lights");
                 return false;
             }
         }
