@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGBSync", "RGBSync\RGBSync.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RGBSyncTest", "RGBSyncTest\RGBSyncTest.csproj", "{DCC71815-1FA2-4209-B14E-73704C8EA768}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpHue", "..\SharpHue\SharpHue\SharpHue.csproj", "{33F0D583-D76D-4A3A-8C16-FEBBC1929161}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{DCC71815-1FA2-4209-B14E-73704C8EA768}.Release|x64.Build.0 = Release|x64
 		{DCC71815-1FA2-4209-B14E-73704C8EA768}.Release|x86.ActiveCfg = Release|Any CPU
 		{DCC71815-1FA2-4209-B14E-73704C8EA768}.Release|x86.Build.0 = Release|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Debug|x64.Build.0 = Debug|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Debug|x86.Build.0 = Debug|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Release|x64.ActiveCfg = Release|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Release|x64.Build.0 = Release|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Release|x86.ActiveCfg = Release|Any CPU
+		{33F0D583-D76D-4A3A-8C16-FEBBC1929161}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

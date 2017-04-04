@@ -12,8 +12,6 @@ namespace RGBSync
         public bool InitialisedLogitech;
         public bool InitialiasedRazer;
 
-        private Chroma _chromaInstance;
-
         public Controller(IntPtr windowHandle)
         {
             InitialisedLogitech = InitLogitech();
@@ -46,15 +44,22 @@ namespace RGBSync
         {
             if (!Chroma.SdkAvailable) return false;
 
-            Debug.WriteLine("Successfully init Razer");
-            _chromaInstance = (Chroma) Chroma.Instance;
-            _chromaInstance.Register(windowHandle);
-            return true;
+            try
+            {
+                Chroma.Instance.Register(windowHandle);
+                Debug.WriteLine("Successfully init Razer");
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return false;
+            }
         }
 
         public void ShutdownRazer()
         {
-            _chromaInstance.Uninitialize();
+            Chroma.Instance.Uninitialize();
             Debug.WriteLine("Successfully shutdown Razer");
         }
 
@@ -62,12 +67,13 @@ namespace RGBSync
         {
             try
             {
-                _chromaInstance.SetAll(color);
+                Debug.WriteLine("Attempting to set Razer lights");
+                Chroma.Instance.SetAll(color);
                 return true;
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Couldn't set Razer lights");
+                Debug.WriteLine(e);
                 return false;
             }
         }

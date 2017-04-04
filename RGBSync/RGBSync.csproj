@@ -69,8 +69,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BridgeConnector.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="LightsController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +115,12 @@
     <Content Include="RzChromaSDK64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SharpHue\SharpHue\SharpHue.csproj">
+      <Project>{33f0d583-d76d-4a3a-8c16-febbc1929161}</Project>
+      <Name>SharpHue</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

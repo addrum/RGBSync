@@ -32,6 +32,7 @@
             this.numericUpDownG = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownB = new System.Windows.Forms.NumericUpDown();
             this.buttonUpdate = new System.Windows.Forms.Button();
+            this.buttonHue = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownB)).BeginInit();
@@ -83,11 +84,22 @@
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
+            // buttonHue
+            // 
+            this.buttonHue.Location = new System.Drawing.Point(119, 88);
+            this.buttonHue.Name = "buttonHue";
+            this.buttonHue.Size = new System.Drawing.Size(100, 41);
+            this.buttonHue.TabIndex = 4;
+            this.buttonHue.Text = "Connect Hue Bridge";
+            this.buttonHue.UseVisualStyleBackColor = true;
+            this.buttonHue.Click += new System.EventHandler(this.buttonHue_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 82);
+            this.ClientSize = new System.Drawing.Size(334, 141);
+            this.Controls.Add(this.buttonHue);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.numericUpDownB);
             this.Controls.Add(this.numericUpDownG);
@@ -108,6 +120,7 @@
         public System.Windows.Forms.NumericUpDown numericUpDownG;
         public System.Windows.Forms.NumericUpDown numericUpDownB;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Button buttonHue;
     }
 }
 

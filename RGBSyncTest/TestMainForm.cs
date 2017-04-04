@@ -26,6 +26,9 @@ namespace RGBSyncTest
             Assert.AreEqual(ExpectedR, target.Data.RgbPercentValue.R);
             Assert.AreEqual(ExpectedG, target.Data.RgbPercentValue.G);
             Assert.AreEqual(ExpectedB, target.Data.RgbPercentValue.B);
+
+            target.Controller.ShutdownLogitech();
+            target.Controller.ShutdownRazer();
         }
 
         [TestMethod]

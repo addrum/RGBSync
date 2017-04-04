@@ -9,6 +9,8 @@ namespace RGBSync
         public readonly Data Data;
         public readonly Controller Controller;
 
+        private BridgeConnector _bridgeConnector;
+
         public MainForm()
         {
             AppDomain.CurrentDomain.ProcessExit += OnProcessExit;
@@ -52,6 +54,23 @@ namespace RGBSync
             {
                 Controller.ShutdownRazer();
             }
+        }
+
+        private void buttonHue_Click(object sender, EventArgs e)
+        {
+            if (_bridgeConnector == null)
+            {
+                _bridgeConnector = new BridgeConnector();
+                _bridgeConnector.Changed += BridgeConnectorOnChanged;
+                _bridgeConnector.InitBridgeConnector();
+
+                buttonHue.Enabled = false;
+            }
+        }
+
+        private void BridgeConnectorOnChanged(object sender, bool bridgeConnected)
+        {
+            buttonHue.Text = bridgeConnected ? "Hue Bridge Connected" : "Press Hue Bridge button now";
         }
     }
 }
