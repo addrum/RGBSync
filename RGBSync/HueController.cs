@@ -21,6 +21,7 @@ namespace RGBSync
             else
             {
                 Debug.WriteLine("Couldn't register any user");
+                throw new UninitializedException("HueController was not intialized");
             }
         }
 

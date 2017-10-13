@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using LedCSharp;
 
@@ -9,16 +10,31 @@ namespace RGBSync
         public override void Init()
         {
             Initialised = LogitechGSDK.LogiLedInit();
-            Debug.WriteLine("Successfully init Logitech");
-            // Logitech recommends waiting inbetween init and doing any other calls
-            Thread.Sleep(10000);
-            LogitechGSDK.LogiLedSetTargetDevice(LogitechGSDK.LOGI_DEVICETYPE_RGB);
+            if (Initialised)
+            {
+                Debug.WriteLine("Successfully init Logitech");
+                // Logitech recommends waiting inbetween init and doing any other calls
+                Thread.Sleep(10000);
+                LogitechGSDK.LogiLedSetTargetDevice(LogitechGSDK.LOGI_DEVICETYPE_RGB);
+            }
+            else
+            {
+                throw new UninitializedException("LogitechController was not initialized");
+            }
         }
 
         public override void UnInit()
         {
-            LogitechGSDK.LogiLedShutdown();
-            Debug.WriteLine("Successfully shutdown Logitech");
+            try
+            {
+                LogitechGSDK.LogiLedShutdown();
+                Debug.WriteLine("Successfully shutdown Logitech");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                throw new UninitializedException($"LogitechController was not unitialized: {e.Message}");
+            }
         }
 
         // ReSharper disable once InconsistentNaming
@@ -26,7 +42,7 @@ namespace RGBSync
         {
             if (!Initialised)
             {
-                throw new UninitializedException("Logitech Controller was not initialized");
+                throw new UninitializedException("LogitechController was not initialized");
             }
 
             Debug.WriteLine("Attempting to set Logitech lights");

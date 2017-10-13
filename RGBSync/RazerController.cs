@@ -17,7 +17,7 @@ namespace RGBSync
         {
             if (!Chroma.SdkAvailable)
             {
-                return;
+                throw new UninitializedException("RazerController was not initialized: Chrome SDK not available");
             }
 
             try
@@ -29,13 +29,23 @@ namespace RGBSync
             catch (Exception e)
             {
                 Debug.WriteLine(e);
+                throw new UninitializedException($"RazerController was not initialized: {e.Message}");
             }
         }
 
         public override void UnInit()
         {
-            Chroma.Instance.Uninitialize();
-            Debug.WriteLine("Successfully shutdown Razer");
+            try
+            {
+                Chroma.Instance.Unregister();
+                Chroma.Instance.Uninitialize();
+                Debug.WriteLine("Successfully shutdown Razer");
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                throw new UninitializedException($"RazerController was not unitialized: {e.Message}");
+            }
         }
 
         // ReSharper disable once InconsistentNaming
