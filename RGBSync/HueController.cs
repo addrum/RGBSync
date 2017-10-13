@@ -28,6 +28,11 @@ namespace RGBSync
 
         public void CreateLights()
         {
+            if (!Initialised)
+            {
+                throw new UninitializedException("HueController was unitialized");
+            }
+
             if (Lights != null) return;
             Lights = new LightCollection();
             foreach (var light in Lights)
@@ -38,6 +43,11 @@ namespace RGBSync
 
         public void UpdateRGB(byte brightness, Light[] lights)
         {
+            if (!Initialised)
+            {
+                throw new UninitializedException("HueController was unitialized");
+            }
+
             new LightStateBuilder()
                 .For(lights)
                 .TurnOn()

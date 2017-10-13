@@ -24,6 +24,11 @@ namespace RGBSync
         // ReSharper disable once InconsistentNaming
         public bool UpdateLogitechRGB(Data.Colour dataRgbPercentValue)
         {
+            if (!Initialised)
+            {
+                throw new UninitializedException("Logitech Controller was not initialized");
+            }
+
             Debug.WriteLine("Attempting to set Logitech lights");
             return LogitechGSDK.LogiLedSetLighting(dataRgbPercentValue.R, dataRgbPercentValue.G, dataRgbPercentValue.B);
         }

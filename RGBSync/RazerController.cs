@@ -41,6 +41,11 @@ namespace RGBSync
         // ReSharper disable once InconsistentNaming
         public bool UpdateRazerRGB(Color color)
         {
+            if (!Initialised)
+            {
+                throw new UninitializedException("RazerController was not initalized");
+            }
+
             try
             {
                 Debug.WriteLine("Attempting to set Razer lights");
