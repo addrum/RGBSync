@@ -29,37 +29,5 @@ namespace RGBSyncTest
 
             target.UnInitAll();
         }
-
-        [TestMethod]
-        public void TestInitLogitechRGB()
-        {
-            var target = new MainForm();
-            Assert.IsTrue(target.LogitechController.Initialised);
-            target.LogitechController.UnInit();
-        }
-
-        [TestMethod]
-        public void TestUpdateLogitechRGB()
-        {
-            var target = new MainForm();
-            Assert.IsTrue(target.LogitechController.UpdateLogitechRGB(new Data().RgbPercentValue));
-            target.LogitechController.UnInit();
-        }
-
-        [TestMethod]
-        public void TestInitRazerRGB()
-        {
-            var target = new MainForm();
-            Assert.IsTrue(target.RazerController.Initialised);
-            target.RazerController.UnInit();
-        }
-
-        [TestMethod]
-        public void TestUpdateRazerRGB()
-        {
-            var target = new MainForm();
-            Assert.IsTrue(target.RazerController.UpdateRazerRGB(new Data().RgbPercentValue.ColoreColor()));
-            target.RazerController.UnInit();
-        }
     }
 }
