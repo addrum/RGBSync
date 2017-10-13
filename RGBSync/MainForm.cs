@@ -29,11 +29,6 @@ namespace RGBSync
 
             Controllers.Add(LogitechController);
             Controllers.Add(RazerController);
-
-            foreach (var controller in Controllers)
-            {
-                controller.Init();
-            }
         }
 
         public void buttonUpdate_Click(object sender, EventArgs e)
@@ -96,6 +91,14 @@ namespace RGBSync
             foreach (var controller in Controllers)
             {
                 controller.UnInit();
+            }
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            foreach (var controller in Controllers)
+            {
+                controller.Init();
             }
         }
     }
