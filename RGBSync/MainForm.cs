@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using LedCSharp;
 
@@ -37,17 +38,10 @@ namespace RGBSync
             Data.RgbPercentValue.G = Convert.ToInt32(numericUpDownG.Text);
             Data.RgbPercentValue.B = Convert.ToInt32(numericUpDownB.Text);
 
-            if (LogitechController.Initialised)
+            foreach (var controller in Controllers)
             {
-                if (LogitechController.UpdateLogitechRGB(Data.RgbPercentValue))
-                {
-                    LogitechGSDK.LogiLedSaveCurrentLighting();
-                }
-            }
-
-            if (RazerController.Initialised)
-            {
-                RazerController.UpdateRazerRGB(Data.RgbPercentValue.ColoreColor());
+                var success = controller.SetRGB(Data.RgbPercentValue);
+                Debug.WriteLine($"{controller.GetType()} successfully set RGB: {success}");
             }
         }
 
@@ -86,6 +80,17 @@ namespace RGBSync
             buttonHue.Text = bridgeConnected ? "Hue Bridge Connected" : "Press Hue Bridge button now";
         }
 
+        /// <summary>
+        /// Useful in tests to initialise all controllers without needing to "show" the form
+        /// </summary>
+        public void InitAll()
+        {
+            foreach (var controller in Controllers)
+            {
+                controller.Init();
+            }
+        }
+
         public void UnInitAll()
         {
             foreach (var controller in Controllers)
@@ -96,10 +101,7 @@ namespace RGBSync
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            foreach (var controller in Controllers)
-            {
-                controller.Init();
-            }
+            InitAll();
         }
     }
 }

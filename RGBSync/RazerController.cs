@@ -48,8 +48,7 @@ namespace RGBSync
             }
         }
 
-        // ReSharper disable once InconsistentNaming
-        public bool UpdateRazerRGB(Color color)
+        public override bool SetRGB(Data.Colour dataRgbPercentValue)
         {
             if (!Initialised)
             {
@@ -59,13 +58,13 @@ namespace RGBSync
             try
             {
                 Debug.WriteLine("Attempting to set Razer lights");
-                Chroma.Instance.SetAll(color);
+                Chroma.Instance.SetAll(dataRgbPercentValue.ColoreColor());
                 return true;
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-                return false;
+                throw new RGBSetException($"RazerController couldn't set RGB: {e.Message}");
             }
         }
     }

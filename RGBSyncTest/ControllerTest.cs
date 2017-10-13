@@ -21,7 +21,7 @@ namespace RGBSyncTest
         {
             var logitechController = new LogitechController();
             logitechController.Init();
-            Assert.IsTrue(logitechController.UpdateLogitechRGB(new Data().RgbPercentValue));
+            Assert.IsTrue(logitechController.SetRGB(new Data().RgbPercentValue));
             logitechController.UnInit();
         }
 
@@ -41,7 +41,7 @@ namespace RGBSyncTest
             var target = new MainForm();
             var razerController = new RazerController(target.Handle);
             razerController.Init();
-            Assert.IsTrue(razerController.UpdateRazerRGB(new Data().RgbPercentValue.ColoreColor()));
+            Assert.IsTrue(razerController.SetRGB(new Data().RgbPercentValue));
             razerController.UnInit();
         }
     }

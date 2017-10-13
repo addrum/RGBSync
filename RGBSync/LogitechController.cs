@@ -37,8 +37,7 @@ namespace RGBSync
             }
         }
 
-        // ReSharper disable once InconsistentNaming
-        public bool UpdateLogitechRGB(Data.Colour dataRgbPercentValue)
+        public override bool SetRGB(Data.Colour dataRgbPercentValue)
         {
             if (!Initialised)
             {
@@ -46,7 +45,11 @@ namespace RGBSync
             }
 
             Debug.WriteLine("Attempting to set Logitech lights");
-            return LogitechGSDK.LogiLedSetLighting(dataRgbPercentValue.R, dataRgbPercentValue.G, dataRgbPercentValue.B);
+            if (LogitechGSDK.LogiLedSetLighting(dataRgbPercentValue.R, dataRgbPercentValue.G, dataRgbPercentValue.B))
+            {
+                return LogitechGSDK.LogiLedSaveCurrentLighting();
+            }
+            throw new RGBSetException("LogitechController couldn't set RGB");
         }
     }
 }

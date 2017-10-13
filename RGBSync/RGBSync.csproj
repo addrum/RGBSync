@@ -84,6 +84,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RazerController.cs" />
+    <Compile Include="RGBSetException.cs" />
     <Compile Include="RGBSyncException.cs" />
     <Compile Include="UninitializedException.cs" />
     <EmbeddedResource Include="MainForm.resx">

@@ -20,6 +20,7 @@ namespace RGBSyncTest
                 numericUpDownG = {Value = ExpectedG},
                 numericUpDownB = {Value = ExpectedB}
             };
+            target.InitAll();
 
             target.buttonUpdate_Click(null, null);
 

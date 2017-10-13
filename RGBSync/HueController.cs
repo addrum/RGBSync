@@ -42,18 +42,20 @@ namespace RGBSync
             }
         } 
 
-        public void UpdateRGB(byte brightness, Light[] lights)
+        public override bool SetRGB(Data.Colour dataRgbPercentValue)
         {
+            return false;
+            //byte brightness, Light[] lights
             if (!Initialised)
             {
                 throw new UninitializedException("HueController was unitialized");
             }
 
-            new LightStateBuilder()
-                .For(lights)
-                .TurnOn()
-                .Brightness(brightness)
-                .Apply();
+            //new LightStateBuilder()
+            //    .For(lights)
+            //    .TurnOn()
+            //    .Brightness(brightness)
+            //    .Apply();
         }
     }
 }
