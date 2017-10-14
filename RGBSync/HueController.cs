@@ -6,22 +6,37 @@ namespace RGBSync
     public class HueController : Controller
     {
         public LightCollection Lights;
-
-        private BridgeConnector _bridgeConnector;
+        public IConnector BridgeConnector;
 
         public override void Init()
         {
-            _bridgeConnector = new BridgeConnector();
-            Initialised = _bridgeConnector.InitBridgeConnector();
+            BridgeConnector = BridgeConnector ?? new BridgeConnector();
+            try
+            {
+                Initialised = BridgeConnector.InitConnector();
+            }
+            catch (ConnectionException e)
+            {
+                Debug.WriteLine(e);
+                throw new InitializationException($"HueConnector was not initialized {e.Message}");
+            }
 
             if (Initialised)
             {
-                CreateLights();
+                try
+                {
+                    CreateLights();
+                }
+                catch (HueConfigurationException e)
+                {
+                    Initialised = false;
+                    Debug.WriteLine(e);
+                    throw new InitializationException($"HueController was initialized but couldn't CreateLights: {e.Message}");
+                }
             }
             else
             {
-                Debug.WriteLine("Couldn't register any user");
-                throw new UninitializedException("HueController was not intialized");
+                throw new InitializationException("HueController was not intialized");
             }
         }
 
@@ -31,7 +46,7 @@ namespace RGBSync
         {
             if (!Initialised)
             {
-                throw new UninitializedException("HueController was unitialized");
+                throw new InitializationException("HueController was not itialized");
             }
 
             if (Lights != null) return;
@@ -48,7 +63,7 @@ namespace RGBSync
             //byte brightness, Light[] lights
             if (!Initialised)
             {
-                throw new UninitializedException("HueController was unitialized");
+                throw new InitializationException("HueController was not unitialized");
             }
 
             //new LightStateBuilder()

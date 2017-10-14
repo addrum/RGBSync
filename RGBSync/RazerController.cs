@@ -17,7 +17,7 @@ namespace RGBSync
         {
             if (!Chroma.SdkAvailable)
             {
-                throw new UninitializedException("RazerController was not initialized: Chrome SDK not available");
+                throw new InitializationException("RazerController was not initialized: Chrome SDK not available");
             }
 
             try
@@ -29,7 +29,7 @@ namespace RGBSync
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-                throw new UninitializedException($"RazerController was not initialized: {e.Message}");
+                throw new InitializationException($"RazerController was not initialized: {e.Message}");
             }
         }
 
@@ -44,7 +44,7 @@ namespace RGBSync
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-                throw new UninitializedException($"RazerController was not unitialized: {e.Message}");
+                throw new InitializationException($"RazerController was not unitialized: {e.Message}");
             }
         }
 
@@ -52,7 +52,7 @@ namespace RGBSync
         {
             if (!Initialised)
             {
-                throw new UninitializedException("RazerController was not initalized");
+                throw new InitializationException("RazerController was not initalized");
             }
 
             try

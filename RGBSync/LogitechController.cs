@@ -19,7 +19,7 @@ namespace RGBSync
             }
             else
             {
-                throw new UninitializedException("LogitechController was not initialized");
+                throw new InitializationException("LogitechController was not initialized");
             }
         }
 
@@ -33,7 +33,7 @@ namespace RGBSync
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-                throw new UninitializedException($"LogitechController was not unitialized: {e.Message}");
+                throw new InitializationException($"LogitechController was not unitialized: {e.Message}");
             }
         }
 
@@ -41,7 +41,7 @@ namespace RGBSync
         {
             if (!Initialised)
             {
-                throw new UninitializedException("LogitechController was not initialized");
+                throw new InitializationException("LogitechController was not initialized");
             }
 
             Debug.WriteLine("Attempting to set Logitech lights");
