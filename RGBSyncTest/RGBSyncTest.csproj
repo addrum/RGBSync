@@ -83,6 +83,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SharpHue\SharpHue\SharpHue.csproj">
+      <Project>{33F0D583-D76D-4A3A-8C16-FEBBC1929161}</Project>
+      <Name>SharpHue</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RGBSync\RGBSync.csproj">
       <Project>{eb0fea4c-d853-4f69-94ee-cd0c78abcb4e}</Project>
       <Name>RGBSync</Name>

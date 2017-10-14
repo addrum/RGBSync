@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RGBSync;
+using SharpHue;
 
 namespace RGBSyncTest
 {
@@ -43,6 +44,30 @@ namespace RGBSyncTest
             razerController.Init();
             Assert.IsTrue(razerController.SetRGB(new Data().RgbPercentValue));
             razerController.UnInit();
+        }
+
+        [TestMethod, TestCategory("hue")]
+        public void TestInitHue()
+        {
+            var hueController = new HueController();
+            hueController.Init();
+            Assert.IsTrue(hueController.Initialised);
+            hueController.UnInit();
+        }
+
+        [TestMethod, TestCategory("hue")]
+        [ExpectedException(typeof(InitializationException),
+            "Expected InitializationException to be thrown")]
+        public void TestInitHueFail()
+        {
+            var hueController = new HueController();
+            var mockBridgeConnector = new Mock<IConnector>();
+            hueController.BridgeConnector = mockBridgeConnector.Object;
+            mockBridgeConnector.Setup(x => x.InitConnector()).Returns(false);
+
+            hueController.Init();
+            Assert.IsFalse(hueController.Initialised);
+            mockBridgeConnector.Verify(x => x.InitConnector(), Times.Once);
         }
     }
 }

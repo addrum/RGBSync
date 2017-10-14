@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BridgeConnector.cs" />
+    <Compile Include="ConnectionException.cs" />
+    <Compile Include="Connector.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="HueController.cs" />
@@ -86,7 +88,7 @@
     <Compile Include="RazerController.cs" />
     <Compile Include="RGBSetException.cs" />
     <Compile Include="RGBSyncException.cs" />
-    <Compile Include="UninitializedException.cs" />
+    <Compile Include="InitializationException.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

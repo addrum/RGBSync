@@ -2,7 +2,7 @@
 
 namespace RGBSync
 {
-    class RGBSyncException : Exception
+    public class RGBSyncException : Exception
     {
         public RGBSyncException()
         {

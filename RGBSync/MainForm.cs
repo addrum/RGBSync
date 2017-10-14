@@ -69,7 +69,7 @@ namespace RGBSync
             {
                 _bridgeConnector = new BridgeConnector();
                 _bridgeConnector.Changed += BridgeConnectorOnChanged;
-                _bridgeConnector.InitBridgeConnector();
+                _bridgeConnector.InitConnector();
 
                 buttonHue.Enabled = false;
             }

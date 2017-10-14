@@ -6,16 +6,14 @@ using SharpHue;
 
 namespace RGBSync
 {
-    public class BridgeConnector
+    public sealed class BridgeConnector : IConnector
     {
-        public HueController LightsController;
-
         public delegate void BridgeConnectedHandler(object sender, bool bridgeConnected);
 
-        public bool InitBridgeConnector()
+        public bool InitConnector()
         {
-            //var userRegistered = false;
-            var userRegistered = InitialiseExistingUser();
+            var userRegistered = false;
+            //var userRegistered = InitialiseExistingUser();
 
             if (!userRegistered)
             {
@@ -31,6 +29,10 @@ namespace RGBSync
             try
             {
                 var username = Settings.Default["Username"].ToString();
+                if (string.IsNullOrEmpty(username))
+                {
+                    throw new ConnectionException("BridgeConnector found username was empty");
+                }
                 Configuration.Initialize(username);
                 Debug.WriteLine($"Initialised Hue connection with user: {Configuration.Username}");
                 OnChanged(true);
@@ -78,7 +80,7 @@ namespace RGBSync
 
         public event BridgeConnectedHandler Changed;
 
-        protected virtual void OnChanged(bool bridgeConnected)
+        private void OnChanged(bool bridgeConnected)
         {
             Changed?.Invoke(this, bridgeConnected);
         }
